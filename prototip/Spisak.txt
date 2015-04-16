@@ -1,0 +1,12 @@
+administrator_dashboard.html         *
+dodaj_pozoriste.html                 *
+dodaj_predstavu.html                 *
+index.html                           *
+login.html                           *
+moderator_dashboard.html             *
+pozoriste.html                       *                      
+predstava.html	                     *
+registracija.html                    *
+ 
+pozoriste_ubaceno.html               *
+predstava_ubacena.html               *
