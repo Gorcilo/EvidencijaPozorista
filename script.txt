@@ -1,0 +1,84 @@
+SHOW CREATE TABLE
+
+CREATE TABLE `kategorije` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `Naziv` varchar(100) NOT NULL,
+ PRIMARY KEY (`id`)
+) 
+
+CREATE TABLE `komentari` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `korisnikId` int(11) NOT NULL,
+ `predstavaId` int(11) NOT NULL,
+ `tekst` varchar(1000) NOT NULL,
+ `statusKomentara` int(11) DEFAULT NULL,
+ `datum` datetime DEFAULT NULL,
+ PRIMARY KEY (`id`),
+ KEY `korisnikId` (`korisnikId`),
+ KEY `predstavaId` (`predstavaId`),
+ CONSTRAINT `komentari_ibfk_1` FOREIGN KEY (`korisnikId`) REFERENCES `korisnik` (`id`),
+ CONSTRAINT `komentari_ibfk_2` FOREIGN KEY (`predstavaId`) REFERENCES `predstave` (`id`)
+) 
+
+
+CREATE TABLE `korisnik` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `username` varchar(30) NOT NULL,
+ `sifra` varchar(20) NOT NULL,
+ `ime` varchar(20) NOT NULL,
+ `prezime` varchar(20) NOT NULL,
+ `email` varchar(40) NOT NULL,
+ `tipKorisnika` int(11) NOT NULL,
+ PRIMARY KEY (`id`)
+) 
+
+CREATE TABLE `ocene` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `predstavaId` int(11) NOT NULL,
+ `korisnikId` int(11) NOT NULL,
+ `vrednost` int(11) NOT NULL,
+ `datum` datetime DEFAULT NULL,
+ PRIMARY KEY (`id`),
+ KEY `predstavaId` (`predstavaId`),
+ KEY `korisnikId` (`korisnikId`),
+ CONSTRAINT `ocene_ibfk_1` FOREIGN KEY (`predstavaId`) REFERENCES `predstave` (`id`),
+ CONSTRAINT `ocene_ibfk_2` FOREIGN KEY (`korisnikId`) REFERENCES `korisnik` (`id`)
+) 
+
+CREATE TABLE `pozorista` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `naziv` varchar(300) NOT NULL,
+ `adresa` varchar(100) NOT NULL,
+ `website` varchar(300) NOT NULL,
+ `telefon` varchar(100) NOT NULL,
+ `email` varchar(100) NOT NULL,
+ `opis` varchar(1000) DEFAULT NULL,
+ PRIMARY KEY (`id`)
+) 
+
+CREATE TABLE `predstave` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `korisnikId` int(11) DEFAULT NULL,
+ `kategorijaId` int(11) NOT NULL,
+ `naziv` varchar(300) NOT NULL,
+ `opis` varchar(3000) NOT NULL,
+ `uloge` varchar(1000) NOT NULL,
+ `rezervacije` varchar(1000) DEFAULT NULL,
+ PRIMARY KEY (`id`),
+ KEY `korisnikId` (`korisnikId`),
+ KEY `kategorijaId` (`kategorijaId`),
+ CONSTRAINT `predstave_ibfk_2` FOREIGN KEY (`korisnikId`) REFERENCES `korisnik` (`id`),
+ CONSTRAINT `predstave_ibfk_3` FOREIGN KEY (`kategorijaId`) REFERENCES `kategorije` (`id`)
+)
+
+CREATE TABLE `repertoar` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `pozoristeId` int(11) NOT NULL,
+ `datum` datetime DEFAULT NULL,
+ `predstavaId` int(11) NOT NULL,
+ PRIMARY KEY (`id`),
+ KEY `pozoristeId` (`pozoristeId`),
+ KEY `predstavaId` (`predstavaId`),
+ CONSTRAINT `repertoar_ibfk_1` FOREIGN KEY (`pozoristeId`) REFERENCES `pozorista` (`id`),
+ CONSTRAINT `repertoar_ibfk_2` FOREIGN KEY (`predstavaId`) REFERENCES `predstave` (`id`)
+)
