@@ -1,3 +1,5 @@
 ALTER TABLE `korisnik` ADD UNIQUE(`username`);
 ALTER TABLE pozorista ADD slika varchar(1000);
 ALTER TABLE predstave ADD slika varchar(1000);
+ALTER TABLE `kategorije` ADD UNIQUE(`Naziv`);
+ALTER TABLE `pozorista` ADD UNIQUE(`naziv`);
