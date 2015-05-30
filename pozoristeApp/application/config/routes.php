@@ -39,6 +39,8 @@
 */
 
 //$route['(:any)'] = 'pages/view/$1';
+$route['addtheatre'] = 'pages/addtheatre';
+$route['addplay'] = 'pages/addplay';
 $route['register'] = 'pages/register';
 $route['logout'] = 'pages/logout';
 $route['login'] = 'pages/login';

@@ -1,11 +1,6 @@
 
-
-<html>
-<head>
-<title>Register</title>
-</head>
-<body>
-
+<div class="container" style="padding-bottom:140px;">
+	<form>
 <?php echo validation_errors(); ?>
  <?php echo form_open('Register'); ?>
      <label for="username">Username:</label>
@@ -25,7 +20,4 @@
      <br/>
      <input type="submit" value="Register"/>
 </form>
-   
-</body>
-</html>
-
+</div>

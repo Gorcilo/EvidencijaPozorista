@@ -11,4 +11,5 @@ class Pozorista_model extends CI_Model {
 		$query = $this->db->get('pozorista');
 		return $query->result_array();
 	}
+	
 }

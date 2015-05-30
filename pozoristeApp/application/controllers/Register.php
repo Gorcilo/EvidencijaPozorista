@@ -28,7 +28,6 @@ class Register extends CI_Controller {
 		else 
 		{
 			
-			$this->load->view('templates/successfulregistration');
 			$this->register_model->register_user(
 				$this->input->post('username'),
 				$this->input->post('password'),

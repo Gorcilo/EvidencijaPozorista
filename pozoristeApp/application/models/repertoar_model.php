@@ -8,7 +8,7 @@ class Repertoar_model extends CI_Model {
 	
 	public function get_repertoar($pozoriste) 
 	{
-		$this->db->select('predstave.*')
+		$this->db->select('predstave.*,repertoar.datum')
 		->from('predstave')
 		->join('repertoar','repertoar.predstavaId = predstave.id')
 		->join('pozorista','pozorista.id = repertoar.pozoristeId')
@@ -16,4 +16,12 @@ class Repertoar_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+	
+	public function check_pozorista($param)
+	{
+		$this -> db -> select('*') -> from('pozorista') -> where('naziv',$param);
+		$query = $this -> db -> get();
+		return $query;
+	}
+	
 }
