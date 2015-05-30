@@ -16,4 +16,12 @@ class Repertoar_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+	
+	public function check_pozorista($param)
+	{
+		$this -> db -> select('*') -> from('pozorista') -> where('naziv',$param);
+		$query = $this -> db -> get();
+		return $query;
+	}
+	
 }

@@ -5,6 +5,7 @@ class Play extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('addplay_model');
+		$this->load->model('repertoar_model');
 		$this->load->library('session');
 	}
 	function index() {
@@ -18,12 +19,12 @@ class Play extends CI_Controller {
 
 		$this->form_validation->set_rules('uloge', 'Uloge', 'required');
 		
-		$this->form_validation->set_rules('pozoriste', 'Pozoriste', 'required');
+		$this->form_validation->set_rules('pozoriste', 'Pozoriste', 'trim|required|callback_check_database');
 				
 
 		if ($this->form_validation->run() == FALSE) 
 		{
-			$this->load->view('templates/failedregistration');
+			$this->load->view('templates/neuspesnododavanje');
 		} 
 		else 
 		{
@@ -45,7 +46,23 @@ class Play extends CI_Controller {
 			$this->load->view('templates/uspesnapredstava');
 		}
 	}
-
+	
+	function check_database($password)
+ {
+  
+    $poz = $this->input->post('pozoriste');
+    $result = $this->repertoar_model->check_pozorista($poz);
+	$rowcount = $result->num_rows();
+    if($rowcount > 0)
+    {
+		return TRUE;
+    }
+	else
+	{
+		$this->form_validation->set_message('check_database', 'Ne postoji pozoriste');
+		return false;
+	}
+ }
 }
 
 ?>

@@ -3,3 +3,6 @@ ALTER TABLE pozorista ADD slika varchar(1000);
 ALTER TABLE predstave ADD slika varchar(1000);
 ALTER TABLE `kategorije` ADD UNIQUE(`Naziv`);
 ALTER TABLE `pozorista` ADD UNIQUE(`naziv`);
+
+ALTER TABLE `repertoar` DROP `datum`;
+ALTER TABLE repertoar ADD datum varchar(3000);

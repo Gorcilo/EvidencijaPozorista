@@ -23,7 +23,7 @@ class Theatre extends CI_Controller {
 
 		if ($this->form_validation->run() == FALSE) 
 		{
-			$this->load->view('templates/failedregistration');
+			$this->load->view('templates/neuspesnododavanje');
 		} 
 		else 
 		{

@@ -12,6 +12,19 @@ Class Addplay_model extends CI_Model
 		$this -> db -> select('id') -> from('kategorije') -> where('Naziv',strtolower($kategorija));
 		$query = $this -> db -> get();
 		$rowcount = $query->num_rows();
+		
+		if($rowcount > 0)
+		{
+			$data = $query -> result_array();		
+		}
+		else
+		{
+			$this -> db -> set('Naziv', strtolower($kategorija));
+			$this -> db -> insert('kategorije');
+			$this -> db -> select('id') -> from('kategorije') -> where('Naziv',strtolower($kategorija));
+			$query = $this -> db -> get();
+		}
+		
 		$data = $query -> result_array();
 		
 		$num = (int)$data[0]['id'];
