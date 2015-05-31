@@ -13,4 +13,9 @@ class predstave_model extends CI_Model{
 	 $query = $this->db->get();
 	 return $query->result_array();
 	 }	 
-	 }
+	 
+	public function get_predstave(){
+		 $query = $this->db->get('predstave');
+		return $query->result_array();
+	 } 
+}

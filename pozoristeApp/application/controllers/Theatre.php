@@ -5,6 +5,7 @@ class Theatre extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('addtheatre_model');
+		$this->load->helper('url');
 	}
 	function index() {
 		$this->load->library('form_validation');
@@ -37,8 +38,12 @@ class Theatre extends CI_Controller {
 				$this->input->post('opis'),
 				$this->input->post('slika')
 			);
-
-			$this->load->view('templates/uspesnopozoriste');
+			$data['show_dashboard'] = TRUE;
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav', $data);
+		$this->load->view('templates/uspesnopozoriste');
+		$this->load->view('templates/footer', $data);
+			
 		}
 	}
 

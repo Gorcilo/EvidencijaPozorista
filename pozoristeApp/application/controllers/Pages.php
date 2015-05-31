@@ -7,6 +7,7 @@ class Pages extends CI_Controller {
 		parent::__construct();
 		$this->load->model('pozorista_model','pozorista');
 		$this->load->model('repertoar_model','repertoar');
+		$this->load->model('korisnik_model','korisnik');
 		$this->load->model('predstave_model');
 		$this->load->model('ocene_model');
 		$this->load->model('komentari_model');
@@ -131,6 +132,27 @@ class Pages extends CI_Controller {
 		
 	}
 	
+	public function manageusers()
+	{
+		if ( ! file_exists(APPPATH.'/views/pages/manageusers.php'))
+		{
+			show_404();
+		}
+		$data['title'] = "Upravljanje korisnicima"; 
+		$data['show_dashboard'] = FALSE;
+		if($this->session->userdata('logged_in')) {
+			 $data['show_dashboard'] = TRUE;
+		}
+		$this->load->helper('url');
+		$data['lista_korisnika'] = $this->korisnik->get_korisnike(); 
+		
+		$this->load->helper(array('form'));
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav');
+		$this->load->view('pages/manageusers');
+		$this->load->view('templates/footer');
+	}
+	
 	public function logger()
 	{	
 	   $data['show_dashboard'] = FALSE;	
@@ -142,6 +164,10 @@ class Pages extends CI_Controller {
 		 $data['show_dashboard'] = TRUE;
 		 if($session_data['type'] == 1 )
 		 {
+			 $this->load->helper(array('form'));
+			$data['lista_korisnika'] = $this->korisnik->get_korisnike();
+			$data['predstava'] = $this->predstave_model->get_predstave();
+			$data['komentari'] = $this->komentari_model->get_pending_comments();
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/nav');
 			$this->load->view('pages/moderatorhome', $data);
