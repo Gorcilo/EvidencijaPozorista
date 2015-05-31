@@ -7,6 +7,9 @@ class Pages extends CI_Controller {
 		parent::__construct();
 		$this->load->model('pozorista_model','pozorista');
 		$this->load->model('repertoar_model','repertoar');
+		$this->load->model('predstave_model');
+		$this->load->model('ocene_model');
+		$this->load->model('komentari_model');
 		$this->load->library('session');
 		$this->load->helper('url');
 	}
@@ -183,5 +186,15 @@ class Pages extends CI_Controller {
 		else {
 			echo "Session doesn't exists!";
 		}
+	}
+		public function predstave($id)
+	{
+		$data['predstava'] = $this->predstave_model->get_predstava($id);
+		$data['komentari'] = $this->komentari_model->get_all($id);
+		$data['ocena'] = $this->ocene_model->get_ocene($id);
+	    $this->load->view('templates/header', $data);
+		$this->load->view('templates/nav');
+		$this->load->view('pages/predstava', $data);
+		$this->load->view('templates/footer', $data);
 	}
 }
