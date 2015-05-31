@@ -23,7 +23,10 @@ class Pages extends CI_Controller {
 		$data['lista_pozoirsta'] = $this->pozorista->get_pozorista();
 		
 		$data['title'] = "Home"; 
-
+        $data['show_dashboard'] = FALSE;
+		if($this->session->userdata('logged_in')) {
+			 $data['show_dashboard'] = TRUE;
+		}
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/nav');
 		$this->load->view('pages/home', $data);
@@ -40,7 +43,10 @@ class Pages extends CI_Controller {
 		
 		$data['title'] = $name; 
 		$data['rep'] = $this->repertoar->get_repertoar($name);
-		
+		 $data['show_dashboard'] = FALSE;
+		if($this->session->userdata('logged_in')) {
+			 $data['show_dashboard'] = TRUE;
+		}
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/nav');
 		$this->load->view('pages/repertoar', $data);
@@ -49,6 +55,7 @@ class Pages extends CI_Controller {
 	
 	public function login()
 	{
+		$data['show_dashboard'] = FALSE;
 		if ( ! file_exists(APPPATH.'/views/pages/login.php'))
 		{
 			show_404();
@@ -70,6 +77,7 @@ class Pages extends CI_Controller {
 	
 	public function register()
 	{
+		$data['show_dashboard'] = FALSE;
 		if ( ! file_exists(APPPATH.'/views/pages/register.php'))
 		{
 			show_404();
@@ -90,6 +98,10 @@ class Pages extends CI_Controller {
 			show_404();
 		}
 		$data['title'] = "Dodavanje pozorista"; 
+		$data['show_dashboard'] = FALSE;
+		if($this->session->userdata('logged_in')) {
+			 $data['show_dashboard'] = TRUE;
+		}
 		$this->load->helper(array('form'));
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/nav');
@@ -104,6 +116,10 @@ class Pages extends CI_Controller {
 			show_404();
 		}
 		$data['title'] = "Dodavanje predstave"; 
+		$data['show_dashboard'] = FALSE;
+		if($this->session->userdata('logged_in')) {
+			 $data['show_dashboard'] = TRUE;
+		}
 		$this->load->helper(array('form'));
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/nav');
@@ -113,13 +129,15 @@ class Pages extends CI_Controller {
 	}
 	
 	public function logger()
-	{
+	{	
+	   $data['show_dashboard'] = FALSE;	
 	   if($this->session->userdata('logged_in'))
 	   {
 		 $session_data = $this->session->userdata('logged_in');
 		 $data['username'] = $session_data['username'];
-		$data['title'] = $session_data['username']; 
-		if($session_data['type'] == 1 )
+		 $data['title'] = $session_data['username']; 
+		 $data['show_dashboard'] = TRUE;
+		 if($session_data['type'] == 1 )
 		 {
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/nav');
@@ -150,6 +168,7 @@ class Pages extends CI_Controller {
 	 
 	public function logout()
 	{
+		$data['show_dashboard'] = FALSE;
 		if($this->session->userdata('logged_in')) {
 			$this->session->unset_userdata('logged_in');
 			$this->session->sess_destroy();

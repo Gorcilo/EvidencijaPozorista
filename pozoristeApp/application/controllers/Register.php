@@ -7,6 +7,7 @@ class Register extends CI_Controller {
 		$this->load->model('register_model');
 	}
 	function index() {
+		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 
 		//$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -22,8 +23,13 @@ class Register extends CI_Controller {
 		$this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
 
 		if ($this->form_validation->run() == FALSE) 
-		{
+		{	
+			$data['title'] = "Neuspela registracija";
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/nav');
 			$this->load->view('templates/failedregistration');
+			$this->load->view('templates/footer');
+			
 		} 
 		else 
 		{
@@ -36,7 +42,12 @@ class Register extends CI_Controller {
 				$this->input->post('email')
 			);
 
+			$data['title'] = "Uspesna registracija";
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/nav');
 			$this->load->view('templates/successfulregistration');
+			$this->load->view('templates/footer');
 		}
 	}
 

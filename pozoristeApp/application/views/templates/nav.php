@@ -6,13 +6,23 @@
 			</a>
 		  </div>
 			<div class="navbar-text navbar-right ">
-				<p><a href="<?php echo 'http://localhost/pozoristeApp/index.php/login/'?>">LogIn</a></p>
+				<p><a href="<?php echo 'http://localhost/pozoristeApp/index.php/login/'?>">
+				<?php 
+				if ($show_dashboard) {
+					echo "Dashboard";
+				} else {
+					echo "LogIn";
+				} ?>
+				</a></p>
 			</div>
-			<div class="navbar-text navbar-right ">
+			<?php if(!$show_dashboard) :?>
+			<div class="navbar-text navbar-right ">	 
 			<p><a href="<?php echo 'http://localhost/pozoristeApp/index.php/register/'?>">Register</a></p>
 			</div>
+			<?php else : ?>
 			<div class="navbar-text navbar-right ">
 				<a href="<?php echo 'http://localhost/pozoristeApp/index.php/logout' ?>">Logout</a>
 			</div>
+			<?php endif; ?>
 		</div>
 	</nav>
