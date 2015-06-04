@@ -27,5 +27,16 @@ class Komentari_model extends CI_Model{
 		$this->db->where('id', $id);
 		$this->db->update('komentari');
 	}
+	
+	public function add_komentar($korisnikId, $predstavaId, $tekst)
+	{
+		$this -> db -> set('korisnikId', $korisnikId);
+		$this -> db -> set('predstavaId', $predstavaId);
+		$this -> db -> set('tekst', $tekst);
+		$this -> db -> set('statusKomentara', 0);
+		$this -> db -> set('datum','nest');
+		
+		$this -> db -> insert('komentari');
+	}
 
 }

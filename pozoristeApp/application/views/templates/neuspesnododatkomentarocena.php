@@ -1,0 +1,1 @@
+<a href=<?php echo "http://localhost/pozoristeApp/index.php/repertoar/predstava/".$id ?>><h1> Neuspesno dodadavanje komentara i ocene </h1></a>

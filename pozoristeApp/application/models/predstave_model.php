@@ -7,9 +7,9 @@ class predstave_model extends CI_Model{
      }
 	 
 	 public function get_predstava($id){
-	 $this->db->select('predstave.*')
+	 $this->db->select('*')
 	 ->from('predstave')
-	 -> where ('predstave.id', $id);
+	 -> where ('id', $id);
 	 $query = $this->db->get();
 	 return $query->result_array();
 	 }	 

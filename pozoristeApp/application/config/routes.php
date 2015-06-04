@@ -39,6 +39,7 @@
 */
 
 //$route['(:any)'] = 'pages/view/$1';
+$route['comments/(:num)'] = 'comments/index/$1';
 $route['repertoar/predstava/(:num)'] = 'pages/predstave/$1';
 $route['addtheatre'] = 'pages/addtheatre';
 $route['addplay'] = 'pages/addplay';

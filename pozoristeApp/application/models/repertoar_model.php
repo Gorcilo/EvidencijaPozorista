@@ -12,7 +12,7 @@ class Repertoar_model extends CI_Model {
 		->from('predstave')
 		->join('repertoar','repertoar.predstavaId = predstave.id')
 		->join('pozorista','pozorista.id = repertoar.pozoristeId')
-		->where('pozorista.naziv',$pozoriste);
+		->where('pozorista.naziv',urldecode($pozoriste));
 		$query = $this->db->get();
 		return $query->result_array();
 	}

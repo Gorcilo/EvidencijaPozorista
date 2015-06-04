@@ -213,11 +213,24 @@ class Pages extends CI_Controller {
 			echo "Session doesn't exists!";
 		}
 	}
-		public function predstave($id)
+	public function predstave($id)
 	{
 		$data['predstava'] = $this->predstave_model->get_predstava($id);
-		$data['komentari'] = $this->komentari_model->get_all($id);
-		$data['ocena'] = $this->ocene_model->get_ocene($id);
+		$data['komentari'] = $this->komentari_model->get_all($id);	
+		$query = $this->ocene_model->get_ocene($id);
+		if($query->num_rows() > 0)
+		{
+			$row = $query->row();
+			$data['ocena'] = $row->vrednost;		
+		}
+		else
+		{
+			$data['ocena'] = 'Nema ocenu';
+		}		
+		if($this->session->userdata('logged_in')) {
+			 $data['show_dashboard'] = TRUE;
+		}
+		$this->load->helper(array('form'));
 	    $this->load->view('templates/header', $data);
 		$this->load->view('templates/nav');
 		$this->load->view('pages/predstava', $data);
