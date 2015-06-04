@@ -10,7 +10,8 @@ class Komentari_model extends CI_Model{
 	 public function get_all($id){
 	 $this->db->select('komentari.*')
 	 ->from('komentari')
-	 -> where ('komentari.predstavaid', $id);
+	 -> where ('komentari.predstavaid', $id)
+	 -> where ('statusKomentara', 1);
 	 $query = $this->db->get();
 	 return $query->result_array();
 	 }	 

@@ -6,3 +6,6 @@ ALTER TABLE `pozorista` ADD UNIQUE(`naziv`);
 
 ALTER TABLE `repertoar` DROP `datum`;
 ALTER TABLE repertoar ADD datum varchar(3000);
+
+ALTER TABLE `ocene` DROP `datum`;
+ALTER TABLE `komentari` CHANGE `datum` `datum` VARCHAR(1000) NULL DEFAULT NULL;
