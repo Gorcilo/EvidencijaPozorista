@@ -29,6 +29,11 @@ class Komentari_model extends CI_Model{
 		$this->db->where('id', $id);
 		$this->db->update('komentari');
 	}
+	public function obrisi_komentar($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('komentari');
+	}
 	
 	public function add_komentar($korisnikId, $predstavaId, $tekst)
 	{ 

@@ -47,7 +47,7 @@ class Pages extends CI_Controller {
 		
 		$data['title'] = $name; 
 		$data['rep'] = $this->repertoar->get_repertoar($name);
-		 $data['show_dashboard'] = FALSE;
+		$data['show_dashboard'] = FALSE;
 		if($this->session->userdata('logged_in')) {
 			 $data['show_dashboard'] = TRUE;
 		}
@@ -215,6 +215,8 @@ class Pages extends CI_Controller {
 	}
 	public function predstave($id)
 	{
+		$this->load->helper('url');
+		
 		$data['predstava'] = $this->predstave_model->get_predstava($id);
 		$data['komentari'] = $this->komentari_model->get_all($id);	
 		$query = $this->ocene_model->get_ocene($id);
@@ -226,7 +228,9 @@ class Pages extends CI_Controller {
 		else
 		{
 			$data['ocena'] = 'Nema ocenu';
-		}		
+		}	
+		$data['show_dashboard'] = FALSE;
+		$data['title'] = "Predstava";
 		if($this->session->userdata('logged_in')) {
 			 $data['show_dashboard'] = TRUE;
 		}
