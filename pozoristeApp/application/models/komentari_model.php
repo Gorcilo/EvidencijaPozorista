@@ -5,6 +5,7 @@ class Komentari_model extends CI_Model{
      public function __construct()
      {
           $this->load->database();
+		  $this->load->helper('date');
      }
 	 
 	 public function get_all($id){
@@ -30,12 +31,16 @@ class Komentari_model extends CI_Model{
 	}
 	
 	public function add_komentar($korisnikId, $predstavaId, $tekst)
-	{
+	{ 
+		$datestring = "%j %M %Y";
+		$time = time(); 
+		$data['current_date'] = mdate($datestring, $time);
+	
 		$this -> db -> set('korisnikId', $korisnikId);
 		$this -> db -> set('predstavaId', $predstavaId);
 		$this -> db -> set('tekst', $tekst);
 		$this -> db -> set('statusKomentara', 0);
-		$this -> db -> set('datum','nest');
+		$this -> db -> set('datum', $data['current_date']);
 		
 		$this -> db -> insert('komentari');
 	}
